@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+# Local progress docs (personal learning notes, not for the repo)
+docs/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

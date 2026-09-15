@@ -1,0 +1,36 @@
+@import "tailwindcss";
+@import "@fontsource-variable/ibm-plex-sans";
+@import "@fontsource/ibm-plex-mono/400.css";
+@import "@fontsource/ibm-plex-mono/500.css";
+
+@theme {
+  /* surfaces — ascending elevation */
+  --color-ink: #101215; /* rail, deepest */
+  --color-base: #16181d; /* page */
+  --color-surface: #1a1d23; /* inputs, hover */
+  --color-raised: #1f232a; /* empty tracks, pressed */
+  --color-line: #262a31; /* borders */
+  --color-line-soft: #1d2027; /* row dividers */
+
+  /* text */
+  --color-fg: #e4e7ec;
+  --color-muted: #98a1ae;
+  --color-subtle: #68717f;
+
+  /* accent */
+  --color-accent: #d0a85c;
+  --color-accent-hi: #e3be78;
+
+  /* status */
+  --color-ok: #5e9c7e;
+  --color-warn: #c97b4a;
+  --color-danger: #c2564b;
+
+  /* type */
+  --font-sans: "IBM Plex Sans Variable", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --font-mono--font-feature-settings: "zero";
+
+  /* radius */
+  --radius-card: 5px;
+}
