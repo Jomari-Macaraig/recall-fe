@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 
-export default function RecallLink({ to, children }) {
+export default function SidebarLink({ to, children }) {
   return (
     <Link
       to={to}

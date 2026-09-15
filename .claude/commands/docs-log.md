@@ -30,4 +30,8 @@ Do this every time this command runs:
 
 6. **Never delete past explanations** unless the user explicitly asks you to correct or prune one — if something becomes outdated, revise or clearly mark it superseded rather than silently removing it.
 
+7. **Maintain a standing "TanStack Router & Query — Hooks & APIs Reference" section** (near the end of the file): a glossary, one entry per hook/export actually used in the codebase so far (`createFileRoute`, `Outlet`, `useParams`, `useMatches`, `Link`/`activeProps`, `loader`/`context`, `useSuspenseQuery`, `queryClient.ensureQueryData`, `invalidateQueries`, etc.). Each entry: signature/shape, what it does, why *this* project uses it, and any gotcha already hit with it. Add a new entry whenever a new hook/API is introduced; never duplicate an existing entry — extend it if a new gotcha or usage shows up later.
+
+8. **Maintain a standing "Mistakes & Gotchas" section** (also near the end): a running, dated list of actual errors made and fixed along the way (a typo, a misused API, a structurally invalid pattern, a wrong assumption) — not near-misses or things merely discussed, only things that were actually built wrong at some point. Each entry: what was done, why it was wrong / what broke, and the fix. Append new entries; never remove past ones (they're the point of the section).
+
 After updating, tell the user which section(s) you added or substantially revised, or that nothing was new.

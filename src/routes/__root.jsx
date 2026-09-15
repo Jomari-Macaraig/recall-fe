@@ -1,5 +1,5 @@
 import { Outlet, createRootRoute, Link } from "@tanstack/react-router";
-import RecallLink from "../components/ui/Link";
+import SidebarLink from "../components/ui/SidebarLink";
 import Group from "../components/ui/Group";
 
 export const Route = createRootRoute({
@@ -30,9 +30,9 @@ function RootComponent() {
         {groups.map((group) => (
           <Group title={group.title} key={group.title}>
             {group.items.map((item) => (
-              <RecallLink key={item.link} to={item.link}>
+              <SidebarLink key={item.link} to={item.link}>
                 {item.name}
-              </RecallLink>
+              </SidebarLink>
             ))}
           </Group>
         ))}

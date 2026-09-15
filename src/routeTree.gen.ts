@@ -11,10 +11,11 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CoachRouteImport } from './routes/coach'
-import { Route as LessonRouteImport } from './routes/lesson'
+import { Route as LessonRouteRouteImport } from './routes/lesson/route'
 import { Route as QuestionRouteImport } from './routes/question'
 import { Route as ReviewRouteImport } from './routes/review'
 import { Route as ScheduleRouteImport } from './routes/schedule'
+import { Route as LessonLessonIdRouteImport } from './routes/lesson/$lessonId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -26,7 +27,7 @@ const CoachRoute = CoachRouteImport.update({
   path: '/coach',
   getParentRoute: () => rootRouteImport,
 } as any)
-const LessonRoute = LessonRouteImport.update({
+const LessonRouteRoute = LessonRouteRouteImport.update({
   id: '/lesson',
   path: '/lesson',
   getParentRoute: () => rootRouteImport,
@@ -46,51 +47,74 @@ const ScheduleRoute = ScheduleRouteImport.update({
   path: '/schedule',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LessonLessonIdRoute = LessonLessonIdRouteImport.update({
+  id: '/$lessonId',
+  path: '/$lessonId',
+  getParentRoute: () => LessonRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/lesson': typeof LessonRouteRouteWithChildren
   '/coach': typeof CoachRoute
-  '/lesson': typeof LessonRoute
   '/question': typeof QuestionRoute
   '/review': typeof ReviewRoute
   '/schedule': typeof ScheduleRoute
+  '/lesson/$lessonId': typeof LessonLessonIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/lesson': typeof LessonRouteRouteWithChildren
   '/coach': typeof CoachRoute
-  '/lesson': typeof LessonRoute
   '/question': typeof QuestionRoute
   '/review': typeof ReviewRoute
   '/schedule': typeof ScheduleRoute
+  '/lesson/$lessonId': typeof LessonLessonIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/lesson': typeof LessonRouteRouteWithChildren
   '/coach': typeof CoachRoute
-  '/lesson': typeof LessonRoute
   '/question': typeof QuestionRoute
   '/review': typeof ReviewRoute
   '/schedule': typeof ScheduleRoute
+  '/lesson/$lessonId': typeof LessonLessonIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/coach' | '/lesson' | '/question' | '/review' | '/schedule'
-  fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/coach' | '/lesson' | '/question' | '/review' | '/schedule'
-  id:
-    | '__root__'
+  fullPaths:
     | '/'
-    | '/coach'
     | '/lesson'
+    | '/coach'
     | '/question'
     | '/review'
     | '/schedule'
+    | '/lesson/$lessonId'
+  fileRoutesByTo: FileRoutesByTo
+  to:
+    | '/'
+    | '/lesson'
+    | '/coach'
+    | '/question'
+    | '/review'
+    | '/schedule'
+    | '/lesson/$lessonId'
+  id:
+    | '__root__'
+    | '/'
+    | '/lesson'
+    | '/coach'
+    | '/question'
+    | '/review'
+    | '/schedule'
+    | '/lesson/$lessonId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  LessonRouteRoute: typeof LessonRouteRouteWithChildren
   CoachRoute: typeof CoachRoute
-  LessonRoute: typeof LessonRoute
   QuestionRoute: typeof QuestionRoute
   ReviewRoute: typeof ReviewRoute
   ScheduleRoute: typeof ScheduleRoute
@@ -116,7 +140,7 @@ declare module '@tanstack/react-router' {
       id: '/lesson'
       path: '/lesson'
       fullPath: '/lesson'
-      preLoaderRoute: typeof LessonRouteImport
+      preLoaderRoute: typeof LessonRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/question': {
@@ -140,13 +164,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ScheduleRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/lesson/$lessonId': {
+      id: '/lesson/$lessonId'
+      path: '/$lessonId'
+      fullPath: '/lesson/$lessonId'
+      preLoaderRoute: typeof LessonLessonIdRouteImport
+      parentRoute: typeof LessonRouteRoute
+    }
   }
 }
 
+interface LessonRouteRouteChildren {
+  LessonLessonIdRoute: typeof LessonLessonIdRoute
+}
+
+const LessonRouteRouteChildren: LessonRouteRouteChildren = {
+  LessonLessonIdRoute: LessonLessonIdRoute,
+}
+
+const LessonRouteRouteWithChildren = LessonRouteRoute._addFileChildren(
+  LessonRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  LessonRouteRoute: LessonRouteRouteWithChildren,
   CoachRoute: CoachRoute,
-  LessonRoute: LessonRoute,
   QuestionRoute: QuestionRoute,
   ReviewRoute: ReviewRoute,
   ScheduleRoute: ScheduleRoute,
