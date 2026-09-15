@@ -3,6 +3,8 @@ import { createFileRoute, Link, Outlet, useMatches } from "@tanstack/react-route
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { lessonsQueryOptions, groupLessons } from "../../api/lessons";
 import PageLayout from "../../components/layout/PageLayout";
+import Subtitle from "../../components/ui/Subtitle";
+import { sub } from "motion/react-client";
 
 export const Route = createFileRoute("/lesson")({
   loader: ({ context: { queryClient } }) => queryClient.ensureQueryData(lessonsQueryOptions()),
@@ -12,6 +14,7 @@ export const Route = createFileRoute("/lesson")({
 function LessonComponent() {
   const { data: lessons } = useSuspenseQuery(lessonsQueryOptions());
   const groupedLessons = useMemo(() => groupLessons(lessons), [lessons]);
+  console.log(groupedLessons);
 
   const matches = useMatches();
   const hasActiveChildRoute = matches.at(-1).routeId !== Route.id;
@@ -38,16 +41,26 @@ function LessonComponent() {
   const content = hasActiveChildRoute ? (
     <Outlet />
   ) : (
-    <>
+    <div className="flex flex-col gap-2">
       {Object.entries(groupedLessons).map(([section, { lessons: directLessons, subsections }]) => (
-        <div key={section}>
-          <h2>{section}</h2>
+        <div key={section} className="flex flex-col gap-2 p-2">
+          <div className="flex justify-between items-center gap-3">
+            <h2>{section}</h2>
+            <span className="block h-px flex-1 max-w-full border-b border-line"></span>
+            <Subtitle>
+              {directLessons.length + Object.entries(subsections).reduce((sum, [, value]) => sum + value.length, 0)} lessons
+            </Subtitle>
+          </div>
 
           {directLessons.length > 0 && (
-            <ul>
+            <ul className="flex flex-col gap-2 border-l border-line rounded-bl">
               {directLessons.map((lesson) => (
                 <li key={lesson.id}>
-                  <Link to="./$lessonId" params={{ lessonId: lesson.id }}>
+                  <Link
+                    to="./$lessonId"
+                    params={{ lessonId: lesson.id }}
+                    className="block text-sm border-line border-b rounded p-2"
+                  >
                     {lesson.title}
                   </Link>
                 </li>
@@ -56,12 +69,16 @@ function LessonComponent() {
           )}
 
           {Object.entries(subsections).map(([subsection, sectionLessons]) => (
-            <div key={subsection}>
-              <h3>{subsection}</h3>
-              <ul>
+            <div key={subsection} className="flex flex-col gap-1">
+              <Subtitle>{subsection}</Subtitle>
+              <ul className="flex flex-col gap-2 border-l border-line rounded-bl">
                 {sectionLessons.map((lesson) => (
                   <li key={lesson.id}>
-                    <Link to="./$lessonId" params={{ lessonId: lesson.id }}>
+                    <Link
+                      to="./$lessonId"
+                      params={{ lessonId: lesson.id }}
+                      className="block text-sm border-line border-b rounded p-2"
+                    >
                       {lesson.title}
                     </Link>
                   </li>
@@ -71,7 +88,7 @@ function LessonComponent() {
           ))}
         </div>
       ))}
-    </>
+    </div>
   );
 
   return (
