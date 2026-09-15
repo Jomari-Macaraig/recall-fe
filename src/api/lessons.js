@@ -1,6 +1,7 @@
 export const lessonKeys = {
   all: ["content", "lessons"],
   list: () => [...lessonKeys.all, "list"],
+  detail: (lessonId) => [...lessonKeys.all, "detail", lessonId],
 };
 
 export function lessonsQueryOptions() {
@@ -9,6 +10,17 @@ export function lessonsQueryOptions() {
     queryFn: async () => {
       const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/content/lesson`);
       if (!res.ok) throw new Error("Failed to fetch lessons");
+      return res.json();
+    },
+  };
+}
+
+export function lessonQueryOptions(lessonId) {
+  return {
+    queryKey: lessonKeys.detail(lessonId),
+    queryFn: async () => {
+      const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/content/lesson/${lessonId}`);
+      if (!res.ok) throw new Error("Failed to fetch lesson");
       return res.json();
     },
   };

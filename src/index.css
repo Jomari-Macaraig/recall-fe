@@ -2,6 +2,7 @@
 @import "@fontsource-variable/ibm-plex-sans";
 @import "@fontsource/ibm-plex-mono/400.css";
 @import "@fontsource/ibm-plex-mono/500.css";
+@plugin "@tailwindcss/typography";
 
 @theme {
   /* surfaces — ascending elevation */
@@ -33,4 +34,12 @@
 
   /* radius */
   --radius-card: 5px;
+
+  --tw-prose-invert-body: var(--color-fg);
+  --tw-prose-invert-headings: var(--color-fg);
+  --tw-prose-invert-links: var(--color-accent-hi);
+  --tw-prose-invert-bold: var(--color-fg);
+  --tw-prose-invert-code: var(--color-accent-hi);
+  --tw-prose-invert-quote-borders: var(--color-accent);
+  --tw-prose-invert-hr: var(--color-line);
 }
