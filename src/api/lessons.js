@@ -13,3 +13,18 @@ export function lessonsQueryOptions() {
     },
   };
 }
+
+export function groupLessons(lessons) {
+  const bySection = {};
+  for (const lesson of lessons) {
+    bySection[lesson.section] ??= { lessons: [], subsections: [] };
+
+    if (lesson.subsection) {
+      bySection[lesson.section].subsections[lesson.subsection] ??= [];
+      bySection[lesson.section].subsections[lesson.subsection].push(lesson);
+    } else {
+      bySection[lesson.section].lessons.push(lesson);
+    }
+  }
+  return bySection;
+}

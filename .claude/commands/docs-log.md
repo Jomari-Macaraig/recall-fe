@@ -10,7 +10,9 @@ Do this every time this command runs:
 
 2. **If it already exists, read it fully before writing anything.** Update/extend it — never blindly regenerate the whole file or repeat what's already explained well.
 
-3. **Organize by concept/file, not strictly by date.** Each meaningful piece of the app (a package, a config change, a route, a pattern like "Router + Query loader integration") gets its own section covering, thoroughly:
+3. **Keep the file organized into numbered top-level "Parts"** (`## Part N — <topic>`), each with its own **`**Status:**`** line (✅ Done / 🚧 In progress / 📝 Designed only) right under the heading, so it's easy to tell at a glance which topics are finished versus still open. Individual concept/file write-ups (the old flat `##` sections) live as `###` subsections inside the relevant Part — never add a new bare top-level `##` section outside a Part. When a topic doesn't obviously belong to an existing Part, either extend the most relevant Part or, only if it's genuinely a new area of the project, add a new numbered Part (update the Contents list at the top when you do). Keep the "Contents" list right after the intro paragraph in sync — one line per Part with its current status and a `[jump](#anchor)` link — and update a Part's status line whenever work on it changes state.
+
+4. **Organize by concept/file within each Part, not strictly by date.** Each meaningful piece of the app (a package, a config change, a route, a pattern like "Router + Query loader integration") gets its own section covering, thoroughly:
    - **What it is** — plain description.
    - **What it does mechanically** — how it actually behaves at runtime, step by step if useful.
    - **Why it's needed / what problem it solves** — the reasoning, especially any tradeoffs or alternatives that were considered and rejected (and why).
@@ -21,17 +23,17 @@ Do this every time this command runs:
 
    Write it like you're teaching a beginner who wants to actually understand the "why," not just get a status update — this is closer to a tutorial/reference than a changelog.
 
-4. **Diff mentally against what's already there.**
-   - A genuinely new concept/milestone → add a new section.
-   - An existing section whose explanation is now incomplete or outdated (e.g. something marked "in progress" is now done, or a decision changed) → revise that section in place rather than appending a duplicate.
+5. **Diff mentally against what's already there.**
+   - A genuinely new concept/milestone → add a new subsection inside the relevant Part.
+   - An existing section whose explanation is now incomplete or outdated (e.g. something marked "in progress" is now done, or a decision changed) → revise that section in place rather than appending a duplicate, and update its Part's status line if that changes too.
    - Nothing new or changed → say so and don't touch the file.
 
-5. **Keep a short "Timeline" section at the top** (a compact dated list of milestones, one line each) that links down to the fuller sections below it — so there's still a quick skim path, but the bulk of the file is the thorough explanations.
+6. **Keep a short "Timeline" section right after "Contents"** (a compact dated list of milestones, one line each) that links down to the fuller sections below it — so there's still a quick skim path, but the bulk of the file is the thorough explanations.
 
-6. **Never delete past explanations** unless the user explicitly asks you to correct or prune one — if something becomes outdated, revise or clearly mark it superseded rather than silently removing it.
+7. **Never delete past explanations** unless the user explicitly asks you to correct or prune one — if something becomes outdated, revise or clearly mark it superseded rather than silently removing it.
 
-7. **Maintain a standing "TanStack Router & Query — Hooks & APIs Reference" section** (near the end of the file): a glossary, one entry per hook/export actually used in the codebase so far (`createFileRoute`, `Outlet`, `useParams`, `useMatches`, `Link`/`activeProps`, `loader`/`context`, `useSuspenseQuery`, `queryClient.ensureQueryData`, `invalidateQueries`, etc.). Each entry: signature/shape, what it does, why *this* project uses it, and any gotcha already hit with it. Add a new entry whenever a new hook/API is introduced; never duplicate an existing entry — extend it if a new gotcha or usage shows up later.
+8. **Maintain a standing "TanStack Router & Query — Hooks & APIs Reference" subsection inside the Reference Part** (`#### TanStack Router` / `#### TanStack Query`): a glossary, one entry per hook/export actually used in the codebase so far (`createFileRoute`, `Outlet`, `useParams`, `useMatches`, `Link`/`activeProps`, `loader`/`context`, `useSuspenseQuery`, `queryClient.ensureQueryData`, `invalidateQueries`, etc.). Each entry: signature/shape, what it does, why *this* project uses it, and any gotcha already hit with it. Add a new entry whenever a new hook/API is introduced; never duplicate an existing entry — extend it if a new gotcha or usage shows up later.
 
-8. **Maintain a standing "Mistakes & Gotchas" section** (also near the end): a running, dated list of actual errors made and fixed along the way (a typo, a misused API, a structurally invalid pattern, a wrong assumption) — not near-misses or things merely discussed, only things that were actually built wrong at some point. Each entry: what was done, why it was wrong / what broke, and the fix. Append new entries; never remove past ones (they're the point of the section).
+9. **Maintain a standing "Mistakes & Gotchas" subsection inside the Reference Part**: a running, numbered list of actual errors made and fixed along the way (a typo, a misused API, a structurally invalid pattern, a wrong assumption) — not near-misses or things merely discussed, only things that were actually built wrong at some point. Each entry: what was done, why it was wrong / what broke, and the fix. Append new entries; never remove or renumber past ones (they're the point of the section).
 
 After updating, tell the user which section(s) you added or substantially revised, or that nothing was new.
