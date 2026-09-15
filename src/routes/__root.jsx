@@ -1,4 +1,4 @@
-import { Outlet, createRootRoute } from "@tanstack/react-router";
+import { Outlet, createRootRoute, Link } from "@tanstack/react-router";
 import RecallLink from "../components/ui/Link";
 import Group from "../components/ui/Group";
 
@@ -21,9 +21,11 @@ const groups = [
 
 function RootComponent() {
   return (
-    <div className="flex h-screen gap-10 bg-base text-fg">
+    <div className="flex h-screen bg-base text-fg">
       <aside className="flex flex-col gap-5 w-64 pt-5 px-2 shrink-0 overflow-y-auto border-r border-line bg-ink">
-        <span className="font-sans">Recall</span>
+        <span className="font-sans">
+          <Link to="/">Recall</Link>
+        </span>
         <hr className="text-line" />
         {groups.map((group) => (
           <Group title={group.title} key={group.title}>
